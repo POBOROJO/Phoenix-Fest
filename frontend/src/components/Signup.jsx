@@ -1,20 +1,37 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../configs/firebase";
+import { auth, db } from "../configs/firebase";
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 const Signup = () => {
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [age, setAge] = useState(0);
+	const [address, setAddress] = useState("");
 
-	const handleSubmit = async (e) => {
+	const navigate = useNavigate();
+
+	const signUp = async (e) => {
 		e.preventDefault();
-	};
+		const user = {
+			name,
+			email,
+			age,
+			address,
+			coins: 0,
+		};
 
-	const signUp = async () => {
 		try {
-			await createUserWithEmailAndPassword(auth, email, password);
-			Navigate("/");
+			const userCredential = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+
+			await setDoc(doc(db, "customer", userCredential.user.uid), user);
+			navigate("/");
 		} catch (error) {
 			console.error(error);
 		}
@@ -23,7 +40,14 @@ const Signup = () => {
 	return (
 		<div className="main">
 			<h1>Create Account</h1>
-			<form onSubmit={handleSubmit} className="signup-form">
+			<form className="signup-form">
+				<input
+					type="text"
+					placeholder="Enter your name"
+					required
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
 				<input
 					type="email"
 					placeholder="Enter your email"
@@ -37,6 +61,20 @@ const Signup = () => {
 					required
 					value={password} // these are useState variables
 					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<input
+					type="number"
+					placeholder="Enter your age"
+					required
+					value={age}
+					onChange={(e) => setAge(e.target.value)}
+				/>
+				<input
+					type="textarea"
+					placeholder="Enter your address"
+					required
+					value={address}
+					onChange={(e) => setAddress(e.target.value)}
 				/>
 				<button onClick={signUp} className="submit-btn">
 					Signup
