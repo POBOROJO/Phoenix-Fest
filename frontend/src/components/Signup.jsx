@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../configs/firebase";
 import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 
 const Signup = () => {
 	const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ const Signup = () => {
 	const signUp = async () => {
 		try {
 			await createUserWithEmailAndPassword(auth, email, password);
+			Navigate("/");
 		} catch (error) {
 			console.error(error);
 		}
@@ -41,7 +43,12 @@ const Signup = () => {
 				</button>
 			</form>
 
-			{/* <p>Already have an account? <Link to="/login" className='login-btn' >Login</Link></p> */}
+			<p>
+				Already have an account?{" "}
+				<Link to="/login" className="login-btn">
+					Login
+				</Link>
+			</p>
 		</div>
 	);
 };
