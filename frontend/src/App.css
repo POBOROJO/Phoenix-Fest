@@ -10,6 +10,10 @@
 	height: 100vh; /* This makes the container take up the full viewport height */
 	width: 100%; /* Adjusted to auto to allow the container to adjust its width based on content */
 	padding: 20px; /* Optional: Adds some padding around the container */
+
+	& h1 {
+		color: #8d9d69;
+	}
 }
 
 .signup-form {
@@ -24,7 +28,7 @@
 
 .submit-btn {
 	padding: 10px;
-	background-color: #007bff;
+	background-color: #61bf62;
 	color: #fff;
 	border: none;
 	border-radius: 5px;
@@ -32,7 +36,7 @@
 }
 
 .submit-btn:hover {
-	background-color: #0056b3;
+	background-color: #8d9d69;
 }
 
 .navbar {
@@ -40,7 +44,55 @@
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	background-color: #333;
+	background-color: #fff;
 	color: #fff;
-	padding: 10px 20px;
+	padding: 0.5rem 5rem;
+}
+
+.main-grid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	height: 100vh; /* This makes the container take up the full viewport height */
+	width: 100%; /* Adjusted to auto to allow the container to adjust its width based on content */
+	padding: 20px; /* Optional: Adds some padding around the container */
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	justify-content: center;
+	.title {
+		color: #61bf62;
+	}
+
+	& p {
+		color: #7c7c7c;
+	}
+
+	& img {
+		width: 100%;
+		/* height: 40rem; */
+	}
+}
+
+#card-1 {
+	grid-column: 3 / 7;
+}
+
+#card-2 {
+	grid-column: 8 / 10;
+}
+
+.logo {
+	margin-right: auto;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+
+	color: #61bf62;
+
+	& img {
+		height: 4rem;
+	}
 }

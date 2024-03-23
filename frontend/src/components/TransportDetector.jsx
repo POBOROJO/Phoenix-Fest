@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-genera;
 
 const TransportDetector = () => {
 	const [image, setImage] = useState(null);
